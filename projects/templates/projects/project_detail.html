@@ -1,0 +1,27 @@
+{% extends 'base.html' %} {% load static %} {% block title %}{{project.title}}{% endblock %} {% block content %}
+<h1>{{project.title}}</h1>
+<div class="card mb-4">
+  <h5 class="card-header">Info</h5>
+  <table class="table table-sm table-striped">
+    <tr>
+      <th>Description</th>
+      <td>{{project.description}}</td>
+    </tr>
+    <tr>
+      <th>Algorithms</th>
+      <td>
+        {% for algo in project.algorithms.all %}
+        <span class="badge bg-dark">{{algo}}</span>
+        {% endfor %}
+      </td>
+    </tr>
+  </table>
+</div>
+<div class="card">
+  <h5 class="card-header">Demo</h5>
+  <div id="demo"></div>
+  {% if project.demo %}
+  <script src="{% static project.demo %}"></script>
+  {% endif %}
+</div>
+{% endblock %}

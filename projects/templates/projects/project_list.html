@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block title %}Projects{% endblock %}
+
+{% block content %}
+<div class="card">
+    <h5 class="card-header">Projects List</h5>
+    <div class="card-body">
+      <div class="row">
+        {% for object in object_list %}
+            <div class="col-md-4 mb-3">
+                <a href='{% url 'projects:detail' pk=object.id %}'>
+                    <div class="card">
+                        <div class="card-body">
+                            {% if object.image %}
+                            <div>
+                                <img style="width: 48rem; height: 24rem" class="card-img-top img-fluid mb-3" src="{{ object.image.url }}" alt="{{ object.name }}">
+                            </div>
+                            {% endif %}
+                            <h5>{{object.title}}</h5>
+                        </div>
+                    </div>
+                </a>
+                
+            </div>
+
+            {% if forloop.counter|divisibleby:3 and not forloop.last %}
+                </div><div class="row">
+            {% endif %}
+        {% endfor %}
+    </div>
+    </div>
+</div>
+{% endblock %}
